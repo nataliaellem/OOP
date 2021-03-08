@@ -17,7 +17,7 @@ public abstract class Conta implements ITaxas{
 
 
     // Construtor
-    public Conta(){
+    protected Conta(){
 
         this.dono = null;
         this.saldo = 0.0;
@@ -117,18 +117,38 @@ public abstract class Conta implements ITaxas{
 
     //função que imprime o extrato
     // Se o parâmetro passado for 1, a ordenação é pelas datas,
-    // se for 2, a ordenação é pelo tipo de operação (1° saque 2° depósito)
+    // se for 2, a ordenação é pelo tipo de operação (1° depósito 2° saque)
 
     public void imprimirExtrato(int tipoOrdenacao){
+        ArrayList<Operacao> operacoesOriginal = new ArrayList<>(); 
+
+        for (Operacao op : this.operacoes){
+            operacoesOriginal.add(op);
+        }
         if (tipoOrdenacao == 1){
             System.out.println("\n\n==== Extrato ordenado por data ====\n");
-            Collections.sort(this.operacoes);
-    
+            
             for (Operacao op : this.operacoes){
                 op.imprimir();
             }
         } else if (tipoOrdenacao == 2){
             System.out.println("\n\n==== Extrato Ordenado por tipo ====\n");
+            
+            // Utilizando Collections.sort para ordenar o array de acordo com o atributo 'tipo' dos objetos
+            Collections.sort(this.operacoes);
+            for (Operacao op : this.operacoes){
+                op.imprimir();
+            }
+            
+            // Fazendo com que o array operacoes deste objeto seja igual antes
+            // A iteração para remover elementos deve ser feita usando o array operacoesOriginal pois este tem o mesmo tamanho 
+            // que o array this.operacoes, e é necessário remover todos os elementos. Além disso, não se tem o tamanho de 'this.operacoes'
+            for (Operacao o : operacoesOriginal){
+                this.operacoes.remove(o);
+            }
+            for(Operacao o : operacoesOriginal){
+                this.operacoes.add(o);
+            }
 
         }
     }

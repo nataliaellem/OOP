@@ -14,6 +14,7 @@ public class Main {
         c.sacar(10);
 
         c.imprimirExtrato(2);
+        c.imprimirExtrato(1);
     }
 }
 

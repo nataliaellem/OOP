@@ -18,12 +18,12 @@ public abstract class Operacao implements ITaxas, Comparable<Operacao> {
     //Métodos
 
     // Método compareTo da interface Comperable que irá 
-    // comparar os objetos Operacao em relação às datas
+    // comparar os objetos Operacao em relação aos tipos
     public int compareTo(Operacao o){
-        if (this.data.compareTo(o.data) < 0){
+        if (this.tipo < o.tipo){
             return -1;
         }
-        else if (this.data.compareTo(o.data) > 0){
+        else if (this.tipo > o.tipo){
             return 1;
         }
         else {
